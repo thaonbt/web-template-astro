@@ -116,6 +116,16 @@ const homePath = getRelativeLocaleUrl(locale, "");
       )
     }
 
+    {
+      featuredPosts.length === 0 && recentPosts.length === 0 && (
+        <section id="no-posts" class="pt-12 pb-6">
+          <p class="text-center text-muted-foreground">
+            {t.home.noPosts}
+          </p>
+        </section>
+      )
+    }
+
     <div class="my-8 text-center">
       <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
         {t.home.allPosts}
