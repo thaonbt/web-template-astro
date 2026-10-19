@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb.astro";
 import Main from "@/components/Main.astro";
 import Footer from "@/components/Footer.astro";
 import config from "@/config";
+import { SITE } from "@config";
 
 const about = await getEntry("pages", "about");
 
@@ -16,21 +17,114 @@ if (!about) {
 }
 
 const { Content } = await render(about);
+
+const skills = [
+  { category: "Frontend", items: ["HTML/CSS", "JavaScript/TypeScript", "React", "Astro", "Tailwind CSS"] },
+  { category: "Backend & DB", items: ["Node.js", "Express", "PostgreSQL", "MongoDB"] },
+  { category: "Tools & Others", items: ["Git", "Docker", "Figma", "RESTful API"] }
+];
+
+const experiences = [
+  {
+    period: "2023 - Present",
+    role: "Senior Frontend Developer",
+    company: "ABC Tech Company",
+    description: "Developing and optimizing high-performance web applications, building and maintaining company design systems."
+  },
+  {
+    period: "2021 - 2023",
+    role: "Fullstack Developer",
+    company: "XYZ Software Solutions",
+    description: "Contributed to e-commerce platform development, designed RESTful APIs, and integrated payment gateways."
+  },
+  {
+    period: "2019 - 2021",
+    role: "Junior Web Developer",
+    company: "DEF Startup",
+    description: "Built landing page interfaces, maintained and upgraded internal CMS systems."
+  }
+];
 ---
 
-<Layout
-  title={`${about.data.title} | ${config.site.title}`}
-  description={about.data.description}
-  ogImage={about.data.ogImage}
-  canonicalURL={about.data.canonicalURL}
->
-  <Header />
+<Layout title="About | Portfolio">
+  <Header activeNav="about" />
 
-  <Breadcrumb />
+  <main id="main-content" class="mx-auto w-full max-w-3xl px-4 pb-12 pt-8">
+    <!-- SECTION 1: PROFILE -->
+    <section id="profile" class="mb-12 flex flex-col items-center gap-6 sm:flex-row sm:items-start">
+      <div class="relative p-1 rounded-full border-2 border-dashed border-skin-accent/80 transition-transform duration-300 hover:scale-105">
+        <img
+          src="/src/assets/images/avatar.png"
+          alt="Your Avatar"
+          class="h-32 w-32 rounded-full object-cover filter grayscale contrast-200 brightness-105 opacity-90 transition-all duration-300 hover:filter-none hover:opacity-100"
+        />
+      </div>
+      <div class="flex-1 text-center sm:text-left">
+        <h1 class="text-2xl font-bold tracking-wide text-skin-accent sm:text-3xl">
+          Hi, I'm [Your Name] 👋
+        </h1>
+        <p class="mt-2 font-medium text-skin-base">
+          Software Engineer / Web Developer
+        </p>
+        <p class="mt-3 text-skin-base opacity-80 leading-relaxed">
+          Passionate about building high-performance web applications with minimalist design and exceptional user experiences. Currently focusing on the JavaScript/TypeScript ecosystem and Jamstack architecture.
+        </p>
+      </div>
+    </section>
 
-  <Main pageTitle={about.data.title} class="app-prose">
-    <Content />
-  </Main>
+    <hr class="border-skin-line my-8" />
+
+    <!-- SECTION 2: SKILLS -->
+    <section id="skills" class="mb-12">
+      <h2 class="text-xl font-bold text-skin-accent mb-6">Technical Skills</h2>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+        {
+          skills.map(group => (
+            <div class="rounded-lg border border-skin-line p-4 transition-colors hover:border-skin-accent">
+              <h3 class="mb-3 font-semibold text-skin-accent">{group.category}</h3>
+              <ul class="flex flex-wrap gap-2">
+                {group.items.map(skill => (
+                  <li class="rounded bg-skin-card px-2.5 py-1 text-xs font-medium text-skin-base border border-skin-line">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <hr class="border-skin-line my-8" />
+
+    <!-- SECTION 3: EXPERIENCE (TIMELINE) -->
+    <section id="experience">
+      <h2 class="text-xl font-bold text-skin-accent mb-8">Work Experience</h2>
+      <div class="relative pl-6 sm:pl-8 border-l-2 border-skin-accent space-y-8">
+        {
+          experiences.map(exp => (
+            <div class="relative group">
+              <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 h-3 w-3 rounded-full bg-skin-fill border-2 border-skin-accent group-hover:bg-skin-accent transition-colors"></div>
+              <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                <h3 class="text-lg font-semibold text-skin-base group-hover:text-skin-accent transition-colors">
+                  {exp.role}
+                </h3>
+                <span class="text-xs font-semibold uppercase tracking-wider text-skin-accent opacity-90">
+                  {exp.period}
+                </span>
+              </div>
+              <p class="text-sm font-medium text-skin-base opacity-75 mb-2">
+                {exp.company}
+              </p>
+              <p class="text-sm text-skin-base opacity-80 leading-relaxed">
+                {exp.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </main>
 
   <Footer />
 </Layout>
