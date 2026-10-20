@@ -1,7 +1,8 @@
 ---
 title: Selenium
 description: Automation testing tool
-tags: [Java,]
+tags: [Java]
 order: 1
 ---
+
 Input details...

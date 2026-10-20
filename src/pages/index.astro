@@ -119,9 +119,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
     {
       featuredPosts.length === 0 && recentPosts.length === 0 && (
         <section id="no-posts" class="pt-12 pb-6">
-          <p class="text-center text-muted-foreground">
-            {t.home.noPosts}
-          </p>
+          <p class="text-muted-foreground text-center">{t.home.noPosts}</p>
         </section>
       )
     }

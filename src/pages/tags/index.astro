@@ -26,12 +26,12 @@ const t = useTranslations(locale);
     {
       tags.length > 0 ? (
         <ul class="flex flex-wrap gap-6">
-          {tags.map(({ tag, tagName }) => <Tag {tag} {tagName} />)}
+          {tags.map(({ tag, tagName }) => (
+            <Tag {tag} {tagName} />
+          ))}
         </ul>
       ) : (
-        <p class="text-center text-muted-foreground py-12">
-          {t.pages.noTags}
-        </p>
+        <p class="text-muted-foreground py-12 text-center">{t.pages.noTags}</p>
       )
     }
   </Main>

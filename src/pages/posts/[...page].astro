@@ -32,12 +32,12 @@ const t = useTranslations(locale);
     {
       page.data.length > 0 ? (
         <ul>
-          {page.data.map(data => <Card {...data} />)}
+          {page.data.map(data => (
+            <Card {...data} />
+          ))}
         </ul>
       ) : (
-        <p class="text-center text-muted-foreground py-12">
-          {t.pages.noPosts}
-        </p>
+        <p class="text-muted-foreground py-12 text-center">{t.pages.noPosts}</p>
       )
     }
   </Main>
