@@ -1,0 +1,121 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+import avatar from "@/assets/images/avatar.png";
+
+const skills = [
+  { category: "Frontend", items: ["HTML/CSS", "JavaScript/TypeScript", "React", "Astro", "Tailwind CSS"] },
+  { category: "Backend & DB", items: ["Node.js", "Express", "PostgreSQL", "MongoDB"] },
+  { category: "Tools & Others", items: ["Git", "Docker", "Figma", "RESTful API"] },
+];
+
+const experiences = [
+  {
+    period: "2023 - Present",
+    role: "Senior Frontend Developer",
+    company: "ABC Tech Company",
+    description: "Developing and optimizing high-performance web applications, building and maintaining company design systems.",
+  },
+  {
+    period: "2021 - 2023",
+    role: "Fullstack Developer",
+    company: "XYZ Software Solutions",
+    description: "Contributed to e-commerce platform development, designed RESTful APIs, and integrated payment gateways.",
+  },
+  {
+    period: "2019 - 2021",
+    role: "Junior Web Developer",
+    company: "DEF Startup",
+    description: "Built landing page interfaces, maintained and upgraded internal CMS systems.",
+  },
+];
+---
+
+<Layout
+  title={`Profile | ${config.site.title}`}
+  description="Profile, technical skills and work experience."
+>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main pageTitle="Profile" pageDesc="Profile, technical skills and work experience.">
+    <!-- SECTION 1: PROFILE -->
+    <section id="profile" class="mb-12 flex flex-col items-center gap-6 sm:flex-row sm:items-start">
+      <div class="border-accent/80 rounded-full border-2 border-dashed p-1 transition-transform duration-300 hover:scale-105">
+        <Image
+          src={avatar}
+          alt="Avatar"
+          width={128}
+          height={128}
+          class="size-32 rounded-full object-cover grayscale transition-all duration-300 hover:grayscale-0"
+        />
+      </div>
+      <div class="flex-1 text-center sm:text-left">
+        <h2 class="text-accent text-2xl font-bold sm:text-3xl">
+          Hi, I'm [Your Name] 👋
+        </h2>
+        <p class="mt-2 font-medium">Software Engineer / Web Developer</p>
+        <p class="mt-3 leading-relaxed opacity-80">
+          Passionate about building high-performance web applications with minimalist design and exceptional user experiences. Currently focusing on the JavaScript/TypeScript ecosystem and Jamstack architecture.
+        </p>
+      </div>
+    </section>
+
+    <hr class="border-border my-8" />
+
+    <!-- SECTION 2: SKILLS -->
+    <section id="skills" class="mb-12">
+      <h2 class="text-accent mb-6 text-xl font-bold">Technical Skills</h2>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+        {
+          skills.map(group => (
+            <div class="border-border hover:border-accent rounded-lg border p-4 transition-colors">
+              <h3 class="text-accent mb-3 font-semibold">{group.category}</h3>
+              <ul class="flex flex-wrap gap-2">
+                {group.items.map(skill => (
+                  <li class="bg-muted border-border rounded border px-2.5 py-1 text-xs font-medium">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <hr class="border-border my-8" />
+
+    <!-- SECTION 3: EXPERIENCE (TIMELINE) -->
+    <section id="experience">
+      <h2 class="text-accent mb-8 text-xl font-bold">Work Experience</h2>
+      <div class="border-accent space-y-8 border-s-2 ps-6 sm:ps-8">
+        {
+          experiences.map(exp => (
+            <div class="group relative">
+              <div class="bg-background border-accent group-hover:bg-accent absolute top-1.5 -start-[31px] size-3 rounded-full border-2 transition-colors sm:-start-[39px]" />
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                <h3 class="group-hover:text-accent text-lg font-semibold transition-colors">
+                  {exp.role}
+                </h3>
+                <span class="text-accent text-xs font-semibold tracking-wider uppercase">
+                  {exp.period}
+                </span>
+              </div>
+              <p class="mb-2 text-sm font-medium opacity-75">{exp.company}</p>
+              <p class="text-sm leading-relaxed opacity-80">{exp.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </Main>
+
+  <Footer />
+</Layout>

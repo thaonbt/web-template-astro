@@ -76,6 +76,30 @@ const isActive = (path: string) => {
       >
         <li class="col-span-2">
           <a
+            href={getRelativeLocaleUrl(locale, "about")}
+            class:list={{ "active-nav": isActive("/about") }}
+          >
+            {t.nav.about}
+          </a>
+        </li>
+        <li class="col-span-2">
+          <a
+            href={getRelativeLocaleUrl(locale, "profile")}
+            class:list={{ "active-nav": isActive("/profile") }}
+          >
+            {t.nav.profile}
+          </a>
+        </li>
+        <li class="col-span-2">
+          <a
+            href={getRelativeLocaleUrl(locale, "portfolios")}
+            class:list={{ "active-nav": isActive("/portfolios") }}
+          >
+            {t.nav.portfolios}
+          </a>
+        </li>
+        <li class="col-span-2">
+          <a
             href={getRelativeLocaleUrl(locale, "posts")}
             class:list={{ "active-nav": isActive("/posts") }}
           >
@@ -88,14 +112,6 @@ const isActive = (path: string) => {
             class:list={{ "active-nav": isActive("/tags") }}
           >
             {t.nav.tags}
-          </a>
-        </li>
-        <li class="col-span-2">
-          <a
-            href={getRelativeLocaleUrl(locale, "about")}
-            class:list={{ "active-nav": isActive("/about") }}
-          >
-            {t.nav.about}
           </a>
         </li>
         {
