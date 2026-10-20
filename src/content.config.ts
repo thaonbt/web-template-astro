@@ -34,4 +34,19 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { posts, pages };
+const portfolios = defineCollection({
+  loader: glob({
+    pattern: "**/[^_]*.{md,mdx}",
+    base: "./src/content/portfolios",
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    tags: z.array(z.string()).default([]),
+    repo: z.url().optional(), // chỉ điền với repo Public
+    demo: z.url().optional(),
+    order: z.number().default(100), // số nhỏ hiển thị trước
+  }),
+});
+
+export const collections = { posts, pages, portfolios };

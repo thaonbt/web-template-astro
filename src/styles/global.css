@@ -23,7 +23,14 @@
 }
 
 @utility max-w-app {
-  @apply max-w-5xl;
+  @apply max-w-4xl
+  /*
+    max-w-2xl	672px	hẹp hơn, đọc văn bản tập trung
+    max-w-3xl	768px	mặc định
+    max-w-4xl	896px	rộng vừa, hợp trang Portfolio dạng lưới
+    max-w-5xl	1024px	rộng, hợp màn hình lớn
+    max-w-[1100px]	tuỳ ý	giá trị riêng
+  */
 }
 
 @utility app-layout {
