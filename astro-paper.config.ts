@@ -2,7 +2,7 @@ import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://your-account.github.io/",
+    url: "https://thaonbt.github.io/",
     title: "@thaonbt",
     description: "A minimal, responsive and SEO-friendly Astro blog theme.",
     author: "Sat Naing",
