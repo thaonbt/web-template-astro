@@ -6,7 +6,10 @@ import config from "@/config";
 export const BLOG_PATH = "src/content/posts";
 
 const posts = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${BLOG_PATH}` }),
+  loader: glob({ 
+    pattern: "**/[^_]*.{md,mdx}", 
+    base: `./${BLOG_PATH}` 
+  }),
   schema: ({ image }) =>
     z.object({
       author: z.string().default(config.site.author),
@@ -25,7 +28,10 @@ const posts = defineCollection({
 });
 
 const pages = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/pages" }),
+  loader: glob({ 
+    pattern: "**/[^_]*.{md,mdx}", 
+    base: "./src/content/pages" 
+  }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -39,14 +45,16 @@ const portfolios = defineCollection({
     pattern: "**/[^_]*.{md,mdx}",
     base: "./src/content/portfolios",
   }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    tags: z.array(z.string()).default([]),
-    repo: z.url().optional(), // chỉ điền với repo Public
-    demo: z.url().optional(),
-    order: z.number().default(100), // số nhỏ hiển thị trước
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      tags: z.array(z.string()).default([]),
+      thumbnail: image().optional(),
+      repo: z.url().optional(),
+      demo: z.url().optional(),
+      order: z.number().default(100),
+    }),
 });
 
 export const collections = { posts, pages, portfolios };

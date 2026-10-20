@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import PortfolioList from "@/components/PortfolioList.astro";
+import PortfolioGrid from "@/components/PortfolioGrid.astro";
+import config from "@/config";
+
+type Props = { view: "list" | "grid" };
+const { view } = Astro.props;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const projects = (await getCollection("portfolios")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<Layout
+  title={`Portfolios | ${config.site.title}`}
+  description="Projects I have done"
+>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle="Portfolios">
+    {
+      view === "grid" ? (
+        <PortfolioGrid projects={projects} locale={locale} />
+      ) : (
+        <PortfolioList projects={projects} locale={locale} />
+      )
+    }
+  </Main>
+  <Footer />
+</Layout>
